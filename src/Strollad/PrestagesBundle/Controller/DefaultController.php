@@ -8,6 +8,9 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('StrolladPrestagesBundle:Default:index.html.twig');
+        $prestations = $this->getDoctrine()
+            ->getRepository('StrolladPrestagesBundle:Prestation')
+            ->findAll();
+        return $this->render('StrolladPrestagesBundle:Default:index.html.twig', array('prestations' => $prestations));
     }
 }

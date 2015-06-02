@@ -1,5 +1,25 @@
 {% extends 'StrolladPrestagesBundle::base.html.twig' %}
 
 {% block body %}
-    <p>A venir ...</p>
+    <h2 class="page-header">Toutes les prestations</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Prix</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for prestation in prestations %}
+            <tr>
+                <th scope="row">{{ prestation.id }}</th>
+                <td>{{ prestation.name }}</td>
+                <td>{{ prestation.price }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
