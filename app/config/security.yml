@@ -1,7 +1,16 @@
 security:
     providers:
         in_memory:
-            memory: ~
+            memory:
+                users:
+                    prestages:
+                        password: $2a$12$lnD82EFgvNfnbyt/MQDSJuoX76HlQXOl4X1zfAeM0wT/3NXtz1YMe
+                        roles: 'ROLE_ADMIN'
+
+    encoders:
+        Symfony\Component\Security\Core\User\User:
+            algorithm: bcrypt
+            cost: 12
 
     firewalls:
         dev:
@@ -10,3 +19,13 @@ security:
 
         default:
             anonymous: ~
+            form_login:
+                login_path: /login
+                check_path: /login_check
+            logout:     true
+
+    access_control:
+            - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+            - { path: ^/logout, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+            # require ROLE_ADMIN for /admin*
+            - { path: ^/, roles: ROLE_ADMIN }

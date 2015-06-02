@@ -1,3 +1,14 @@
 strollad_prestages_homepage:
     path:     /
     defaults: { _controller: StrolladPrestagesBundle:Default:index }
+
+strollad_prestages_login:
+    path:     /login
+    defaults: { _controller: StrolladPrestagesBundle:Security:login }
+
+strollad_prestages_login_check:
+    path:     /login_check
+    defaults: { _controller: StrolladPrestagesBundle:Security:loginCheck }
+
+logout:
+    path:     /logout

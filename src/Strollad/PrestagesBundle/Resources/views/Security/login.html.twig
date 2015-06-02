@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 
-    <title>Bootstrap 101 Template</title>
+    <title>Strollad -Connexion</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +12,7 @@
     <!-- Bootstrap -->
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" media="screen">
     <link href="{{ asset('css/bootstrap-theme.css') }}" rel="stylesheet" media="screen">
+    <link href="{{ asset('css/signin.css') }}" rel="stylesheet" media="screen">
 
     <!-- HTML5 Shim and Respond.js add IE8 support of HTML5 elements and media queries -->
     {% include 'BraincraftedBootstrapBundle::ie8-support.html.twig' %}
@@ -20,7 +21,6 @@
 
 <body role="document">
 
-<!-- Fixed navbar -->
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -33,25 +33,29 @@
             </button>
             <a class="navbar-brand" href="#">Strollad</a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Accueil</a></li>
-            </ul>
-        </div>
-        <!--/.nav-collapse -->
     </div>
 </nav>
 
 <div class="container theme-showcase" role="main">
+    <form class="form-signin" action="{{ path('strollad_prestages_login_check') }}" method="post">
+        <h2 class="form-signin-heading">Connexion</h2>
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-        <h1>Bienvenue</h1>
+        {% if error %}
+            <div class="alert alert-danger">{{ error.message }}</div>
+        {% endif %}
 
-        <p>Ca semble bien parti !</p>
-    </div>
+        <label for="username" class="sr-only">Username:</label>
+        <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control"
+               placeholder="Utilisateur" required autofocus/>
 
-    {% block body %}{% endblock %}
+        <label for="password" class="sr-only">Password:</label>
+        <input type="password" id="password" name="_password" class="form-control" placeholder="Mot de passe" required/>
+
+        <input type="hidden" name="_target_path" value="/"/>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit" name="login">Se connecter</button>
+    </form>
+
 </div>
 <!-- /container -->
 {% block javascripts %}{% endblock %}
