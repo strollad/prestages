@@ -3,6 +3,7 @@
 namespace Strollad\PrestagesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Prestation
@@ -23,6 +24,7 @@ class Prestation
 
     /**
      * @var string
+     * @Assert\NotBlank()
      *
      * @ORM\Column(name="name", type="string", length=255, nullable=false)
      */
@@ -30,17 +32,18 @@ class Prestation
 
     /**
      * @var integer
+     * @Assert\NotBlank()
+     * @Assert\Type("numeric")
      *
      * @ORM\Column(name="price", type="integer", nullable=false)
      */
     private $price = '0';
 
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -63,7 +66,7 @@ class Prestation
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -86,7 +89,7 @@ class Prestation
     /**
      * Get price
      *
-     * @return integer 
+     * @return integer
      */
     public function getPrice()
     {

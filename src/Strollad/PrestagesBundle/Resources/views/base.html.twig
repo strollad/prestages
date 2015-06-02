@@ -12,6 +12,7 @@
     <!-- Bootstrap -->
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" media="screen">
     <link href="{{ asset('css/bootstrap-theme.css') }}" rel="stylesheet" media="screen">
+    <link href="{{ asset('css/bootstrap-silk-icons.css') }}" rel="stylesheet" media="screen">
 
     <!-- HTML5 Shim and Respond.js add IE8 support of HTML5 elements and media queries -->
     {% include 'BraincraftedBootstrapBundle::ie8-support.html.twig' %}
@@ -43,14 +44,6 @@
 </nav>
 
 <div class="container theme-showcase" role="main">
-
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-        <h1>Bienvenue</h1>
-
-        <p>Ca semble bien parti !</p>
-    </div>
-
     {% block body %}{% endblock %}
 </div>
 <!-- /container -->

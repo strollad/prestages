@@ -12,3 +12,19 @@ strollad_prestages_login_check:
 
 logout:
     path:     /logout
+
+strollad_prestages_prestation_add:
+    path:     /presta/add
+    defaults: { _controller: StrolladPrestagesBundle:Prestation:add }
+
+strollad_prestages_prestation_edit:
+    pattern:     /presta/{id}/edit
+    defaults: { _controller: StrolladPrestagesBundle:Prestation:edit }
+    requirements:
+        id:  \d+
+
+strollad_prestages_prestation_delete:
+    pattern:     /presta/{id}/delete
+    defaults: { _controller: StrolladPrestagesBundle:Prestation:delete }
+    requirements:
+        id:  \d+
