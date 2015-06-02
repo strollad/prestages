@@ -1,0 +1,3 @@
+strollad_prestages_homepage:
+    path:     /
+    defaults: { _controller: StrolladPrestagesBundle:Default:index }

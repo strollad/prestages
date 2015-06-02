@@ -1,0 +1,4 @@
+services:
+#    strollad_prestages.example:
+#        class: Strollad\PrestagesBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
