@@ -3,9 +3,13 @@
 namespace Strollad\PrestagesBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class DefaultController extends Controller
 {
+    /**
+     * @Route("/", name="strollad_prestages_homepage")
+     */
     public function indexAction()
     {
         $prestations = $this->getDoctrine()

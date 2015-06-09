@@ -1,30 +1,4 @@
-strollad_prestages_homepage:
-    path:     /
-    defaults: { _controller: StrolladPrestagesBundle:Default:index }
-
-strollad_prestages_login:
-    path:     /login
-    defaults: { _controller: StrolladPrestagesBundle:Security:login }
-
-strollad_prestages_login_check:
-    path:     /login_check
-    defaults: { _controller: StrolladPrestagesBundle:Security:loginCheck }
-
-logout:
-    path:     /logout
-
-strollad_prestages_prestation_add:
-    path:     /presta/add
-    defaults: { _controller: StrolladPrestagesBundle:Prestation:add }
-
-strollad_prestages_prestation_edit:
-    pattern:     /presta/{id}/edit
-    defaults: { _controller: StrolladPrestagesBundle:Prestation:edit }
-    requirements:
-        id:  \d+
-
-strollad_prestages_prestation_delete:
-    pattern:     /presta/{id}/delete
-    defaults: { _controller: StrolladPrestagesBundle:Prestation:delete }
-    requirements:
-        id:  \d+
+strollad_prestages:
+    resource: "@StrolladPrestagesBundle/Controller/"
+    type:     annotation
+    prefix:   /

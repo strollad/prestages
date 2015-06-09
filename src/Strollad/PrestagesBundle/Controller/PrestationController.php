@@ -6,9 +6,14 @@ use Strollad\PrestagesBundle\Entity\Prestation;
 use Strollad\PrestagesBundle\Form\Type\PrestationType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class PrestationController extends Controller
 {
+
+    /**
+     * @Route("/presta/add", name="strollad_prestages_prestation_add")
+     */
     public function addAction(Request $request)
     {
         $prestation = new Prestation();
@@ -23,6 +28,9 @@ class PrestationController extends Controller
         return $this->render('StrolladPrestagesBundle:Prestation:form.html.twig', array('title' => 'Ajouter la prestation', 'form' => $form->createView()));
     }
 
+    /**
+     * @Route("/presta/{id}/edit", name="strollad_prestages_prestation_edit", requirements = { "id" = "\d+" })
+     */
     public function editAction($id, Request $request)
     {
         $em         = $this->getDoctrine()->getManager();
@@ -41,6 +49,9 @@ class PrestationController extends Controller
         return $this->render('StrolladPrestagesBundle:Prestation:form.html.twig', array('title' => 'Modifier la prestation', 'form' => $form->createView()));
     }
 
+    /**
+     * @Route("/presta/{id}/delete", name="strollad_prestages_prestation_delete", requirements = { "id" = "\d+" })
+     */
     public function deleteAction($id)
     {
         $em         = $this->getDoctrine()->getManager();
