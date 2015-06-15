@@ -1,14 +1,19 @@
 security:
+    role_hierarchy:
+        ROLE_MEMBER: ROLE_USER
+        ROLE_BUREAU: ROLE_MEMBER
+        ROLE_SECRETAIRE: ROLE_BUREAU
+        ROLE_TRESORIER: ROLE_BUREAU
+        ROLE_PRESIDENT: ROLE_BUREAU
+        ROLE_ADMIN: [ROLE_SECRETAIRE, ROLE_TRESORIER, ROLE_PRESIDENT]
     providers:
-        in_memory:
-            memory:
-                users:
-                    prestages:
-                        password: $2a$12$lnD82EFgvNfnbyt/MQDSJuoX76HlQXOl4X1zfAeM0wT/3NXtz1YMe
-                        roles: 'ROLE_ADMIN'
+        lapinou:
+            entity:
+                class: StrolladPrestagesBundle:Utilisateur
+                property: username
 
     encoders:
-        Symfony\Component\Security\Core\User\User:
+        Strollad\PrestagesBundle\Entity\Utilisateur:
             algorithm: bcrypt
             cost: 12
 
@@ -27,5 +32,4 @@ security:
     access_control:
             - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
             - { path: ^/logout, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-            # require ROLE_ADMIN for /admin*
-            - { path: ^/, roles: ROLE_ADMIN }
+            - { path: ^/, roles: ROLE_BUREAU }

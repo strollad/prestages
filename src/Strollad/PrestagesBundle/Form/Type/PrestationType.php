@@ -12,7 +12,7 @@ class PrestationType extends AbstractType
     {
         $builder
             ->add('name', 'text', array('label' => 'Nom de la prestation'))
-            ->add('price', 'text', array('label' => 'Prix'))
+            ->add('priceKendalch', 'text', array('label' => 'Prix Kendal\'ch'))
             ->add('save', 'submit', array('label' => 'Valider'));
     }
 

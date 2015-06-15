@@ -31,14 +31,73 @@ class Prestation
     private $name;
 
     /**
-     * @var integer
+     * @var date
      * @Assert\NotBlank()
-     * @Assert\Type("numeric")
+     * @Assert\Type("date")
      *
-     * @ORM\Column(name="price", type="integer", nullable=false)
+     * @ORM\Column(name="date_prestation", type="date", nullable=false)
      */
-    private $price = '0';
+    private $datePrestation;
 
+    /**
+     * @var string
+     * @Assert\NotBlank()
+     *
+     * @ORM\Column(name="place", type="string")
+     */
+    private $place;
+
+    private $nameContact;
+    private $telContact;
+    private $emailContact;
+
+    /**
+     * @var float
+     * @Assert\NotBlank()
+     * @Assert\Type("float")
+     *
+     * @ORM\Column(name="priceKendalch", type="float", nullable=false)
+     */
+    private $priceKendalch = '0';
+
+    /**
+     * @var float
+     * @Assert\NotBlank()
+     * @Assert\Type("float")
+     *
+     * @ORM\Column(name="priceTransport", type="float", nullable=false)
+     */
+    private $priceTransport = '0';
+
+    /**
+     * @var float
+     * @Assert\NotBlank()
+     * @Assert\Type("float")
+     *
+     * @ORM\Column(name="priceAnimation", type="float", nullable=false)
+     */
+    private $priceAnimation = '0';
+
+    /**
+     * @var float
+     * @Assert\NotBlank()
+     * @Assert\Type("float")
+     *
+     * @ORM\Column(name="priceDivers", type="float", nullable=false)
+     */
+    private $priceDivers = '0';
+
+    /**
+     * @ORM\OneToOne(targetEntity="Client")
+     * @ORM\JoinColumn(name="client_id", referencedColumnName="id")
+     **/
+    private $client;
+
+    //private $repas; // Aucun, Midi, Soir, Midi + Soir
+    // on efface autreformation et on étend Nb musiciens
+
+    //private $archive;
+    //private
 
     /**
      * Get id
@@ -76,12 +135,12 @@ class Prestation
     /**
      * Set price
      *
-     * @param integer $price
+     * @param float $price
      * @return Prestation
      */
-    public function setPrice($price)
+    public function setPriceKendalch($price)
     {
-        $this->price = $price;
+        $this->priceKendalch = $price;
 
         return $this;
     }
@@ -89,10 +148,148 @@ class Prestation
     /**
      * Get price
      *
-     * @return integer
+     * @return float
      */
-    public function getPrice()
+    public function getPriceKendalch()
     {
-        return $this->price;
+        return $this->priceKendalch;
+    }
+
+    /**
+     * Set priceTransport
+     *
+     * @param float $priceTransport
+     * @return Prestation
+     */
+    public function setPriceTransport($priceTransport)
+    {
+        $this->priceTransport = $priceTransport;
+
+        return $this;
+    }
+
+    /**
+     * Get priceTransport
+     *
+     * @return float 
+     */
+    public function getPriceTransport()
+    {
+        return $this->priceTransport;
+    }
+
+    /**
+     * Set priceAnimation
+     *
+     * @param float $priceAnimation
+     * @return Prestation
+     */
+    public function setPriceAnimation($priceAnimation)
+    {
+        $this->priceAnimation = $priceAnimation;
+
+        return $this;
+    }
+
+    /**
+     * Get priceAnimation
+     *
+     * @return float 
+     */
+    public function getPriceAnimation()
+    {
+        return $this->priceAnimation;
+    }
+
+    /**
+     * Set priceDivers
+     *
+     * @param float $priceDivers
+     * @return Prestation
+     */
+    public function setPriceDivers($priceDivers)
+    {
+        $this->priceDivers = $priceDivers;
+
+        return $this;
+    }
+
+    /**
+     * Get priceDivers
+     *
+     * @return float 
+     */
+    public function getPriceDivers()
+    {
+        return $this->priceDivers;
+    }
+
+    /**
+     * Set datePrestation
+     *
+     * @param \DateTime $datePrestation
+     * @return Prestation
+     */
+    public function setDatePrestation($datePrestation)
+    {
+        $this->datePrestation = $datePrestation;
+
+        return $this;
+    }
+
+    /**
+     * Get datePrestation
+     *
+     * @return \DateTime 
+     */
+    public function getDatePrestation()
+    {
+        return $this->datePrestation;
+    }
+
+    /**
+     * Set place
+     *
+     * @param string $place
+     * @return Prestation
+     */
+    public function setPlace($place)
+    {
+        $this->place = $place;
+
+        return $this;
+    }
+
+    /**
+     * Get place
+     *
+     * @return string 
+     */
+    public function getPlace()
+    {
+        return $this->place;
+    }
+
+    /**
+     * Set client
+     *
+     * @param \Strollad\PrestagesBundle\Entity\Client $client
+     * @return Prestation
+     */
+    public function setClient(\Strollad\PrestagesBundle\Entity\Client $client = null)
+    {
+        $this->client = $client;
+
+        return $this;
+    }
+
+    /**
+     * Get client
+     *
+     * @return \Strollad\PrestagesBundle\Entity\Client 
+     */
+    public function getClient()
+    {
+        return $this->client;
     }
 }
