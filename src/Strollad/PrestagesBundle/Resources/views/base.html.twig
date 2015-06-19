@@ -38,6 +38,19 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Accueil</a></li>
             </ul>
+            <img src="{{ gravatar(app.user.email) }}" class="pull-right"/>
+            <ul class="nav navbar-nav pull-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        {{ app.user.username }} <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="/mon-profil">Mon profil</a></li>
+                        <li class="divider"></li>
+                        <li><a href="/logout">Me déconnecter</a></li>
+                    </ul>
+                </li>
+            </ul>
         </div>
         <!--/.nav-collapse -->
     </div>
