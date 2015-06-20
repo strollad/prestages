@@ -36,7 +36,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Accueil</a></li>
+                <li class="active"><a href="{{ path('strollad_prestages_homepage') }}">Accueil</a></li>
             </ul>
             <img src="{{ gravatar(app.user.email) }}" class="pull-right"/>
             <ul class="nav navbar-nav pull-right">
@@ -45,9 +45,9 @@
                         {{ app.user.username }} <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="/mon-profil">Mon profil</a></li>
+                        <li><a href="{{ path('strollad_prestages_myprofil') }}">Mon profil</a></li>
                         <li class="divider"></li>
-                        <li><a href="/logout">Me déconnecter</a></li>
+                        <li><a href="{{ path('strollad_prestages_logout') }}">Me déconnecter</a></li>
                     </ul>
                 </li>
             </ul>
@@ -57,6 +57,17 @@
 </nav>
 
 <div class="container theme-showcase" role="main">
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        <div class="alert alert-success" role="alert">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+    {% for flashMessage in app.session.flashbag.get('error') %}
+        <div class="alert alert-danger" role="alert">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
     {% block body %}{% endblock %}
 </div>
 <!-- /container -->

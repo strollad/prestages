@@ -17,4 +17,13 @@ class DefaultController extends Controller
             ->findAll();
         return $this->render('StrolladPrestagesBundle:Default:index.html.twig', array('prestations' => $prestations));
     }
+
+    /**
+     * @Route("/mon-profil", name="strollad_prestages_myprofil")
+     */
+    public function monProfilAction()
+    {
+        $me = $this->get('security.context')->getToken()->getUser();
+        return $this->render('StrolladPrestagesBundle:Default:mon-profil.html.twig', array('me' => $me));
+    }
 }
