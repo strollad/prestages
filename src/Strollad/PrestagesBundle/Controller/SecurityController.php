@@ -17,18 +17,12 @@ class SecurityController extends Controller
     {
         $authenticationUtils = $this->get('security.authentication_utils');
 
-        // get the login error if there is one
-        $error = $authenticationUtils->getLastAuthenticationError();
-
-        // last username entered by the user
-        $lastUsername = $authenticationUtils->getLastUsername();
-
         return $this->render(
             'StrolladPrestagesBundle:Security:login.html.twig',
             array(
                 // last username entered by the user
-                'last_username' => $lastUsername,
-                'error'         => $error,
+                'last_username' => $authenticationUtils->getLastUsername(),
+                'error'         => $authenticationUtils->getLastAuthenticationError()
             )
         );
     }
@@ -60,10 +54,9 @@ class SecurityController extends Controller
         $pass2 = $request->request->get('new-pass-2');
         if ($pass1 == $pass2) {
             if (strlen($pass1) >= 8) {
-                $me       = $this->get('security.context')->getToken()->getUser();
-                $factory  = $this->get('security.encoder_factory');
-                $encoder  = $factory->getEncoder($me);
-                $password = $encoder->encodePassword($pass1, $me->getSalt());
+                $me       = $this->get('security.token_storage')->getToken()->getUser();
+                $encoder  = $this->container->get('security.password_encoder');
+                $password = $encoder->encodePassword($me, $pass1);
                 $me->setPassword($password);
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($me);

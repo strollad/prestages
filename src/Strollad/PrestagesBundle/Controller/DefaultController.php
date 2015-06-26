@@ -23,7 +23,7 @@ class DefaultController extends Controller
      */
     public function monProfilAction()
     {
-        $me = $this->get('security.context')->getToken()->getUser();
+        $me = $this->get('security.token_storage')->getToken()->getUser();
         return $this->render('StrolladPrestagesBundle:Default:mon-profil.html.twig', array('me' => $me));
     }
 }
