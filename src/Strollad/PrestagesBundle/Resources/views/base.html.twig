@@ -13,6 +13,8 @@
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" media="screen">
     <link href="{{ asset('css/bootstrap-theme.css') }}" rel="stylesheet" media="screen">
     <link href="{{ asset('css/bootstrap-silk-icons.css') }}" rel="stylesheet" media="screen">
+    {% block additionnalcss %}{% endblock %}
+    <link href="{{ asset('bundles/strolladprestages/css/strollad-prestages.css') }}" rel="stylesheet" media="screen">
 
     <!-- HTML5 Shim and Respond.js add IE8 support of HTML5 elements and media queries -->
     {% include 'BraincraftedBootstrapBundle::ie8-support.html.twig' %}
@@ -71,11 +73,12 @@
     {% block body %}{% endblock %}
 </div>
 <!-- /container -->
-{% block javascripts %}{% endblock %}
 
 <!-- jQuery (necessary for Bootstraps JavaScript plugins) -->
 <script src="{{ asset('js/jquery.js') }}"></script>
 <!-- Include all JavaScripts, compiled by Assetic -->
 <script src="{{ asset('js/bootstrap.js') }}"></script>
+{% block additionnaljs %}{% endblock %}
+{% block javascripts %}{% endblock %}
 </body>
 </html>

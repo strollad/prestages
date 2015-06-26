@@ -1,41 +1,105 @@
 {% extends 'StrolladPrestagesBundle::base.html.twig' %}
 
+{% block additionnalcss %}
+    <link href="{{ asset('css/bootstrap-switch.min.css') }}" rel="stylesheet" media="screen">
+{% endblock %}
+{% block additionnaljs %}
+    <script src="{{ asset('js/bootstrap-switch.min.js') }}"></script>
+{% endblock %}
+
 {% block body %}
-    <h2 class="page-header">Toutes les prestations</h2>
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Nom</th>
-                <th scope="col">Prix</th>
-                <th scope="col">&nbsp;</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for prestation in prestations %}
-            <tr>
-                <th scope="row">{{ prestation.id }}</th>
-                <td>{{ prestation.name }}</td>
-                <td>{{ prestation.price }}</td>
-                <td>
-                    <div class="btn-toolbar text-center">
-                        <a type="button" class="btn btn-default btn-xs" aria-label="Modifier" href="{{ path('strollad_prestages_prestation_edit', {'id': prestation.id}) }}">
-                            <span class="silk-icon-page-edit" aria-hidden="true"></span> Modifier
-                        </a>
-                        <a type="button" class="btn btn-default btn-xs" aria-label="Supprimer" href="{{ path('strollad_prestages_prestation_delete', {'id': prestation.id}) }}">
-                            <span class="silk-icon-page-delete" aria-hidden="true"></span> Supprimer
-                        </a>
+    <div class="row">
+        <div class="col-xs-12 col-md-6">
+            <h3 class="page-header">
+                Prestations
+                <div id="toggle-task-state-container">
+                    <input type="checkbox" id="toggle-task-state" checked="checked">
+                </div>
+            </h3>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Date</th>
+                        <th scope="col">Manifestation</th>
+                        <th scope="col">Commune</th>
+                        <th scope="col">&nbsp;</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for prestation in prestations %}
+                        <tr>
+                            <th scope="row">{{ prestation.id }}</th>
+                            <td>{{ prestation.name }}</td>
+                            <td>{{ prestation.price }}</td>
+                            <td>
+                                <div class="btn-toolbar text-center">
+                                    <a type="button" class="btn btn-default btn-xs" aria-label="Modifier"
+                                       href="{{ path('strollad_prestages_prestation_edit', {'id': prestation.id}) }}">
+                                        <span class="silk-icon-page-edit" aria-hidden="true"></span> Modifier
+                                    </a>
+                                    <a type="button" class="btn btn-default btn-xs" aria-label="Supprimer"
+                                       href="{{ path('strollad_prestages_prestation_delete', {'id': prestation.id}) }}">
+                                        <span class="silk-icon-page-delete" aria-hidden="true"></span> Supprimer
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="btn-toolbar text-center">
+                <a type="button" class="btn btn-default btn-sm" aria-label="Ajouter"
+                   href="{{ path('strollad_prestages_prestation_add') }}">
+                    <span class="silk-icon-page-add" aria-hidden="true"></span> Ajouter
+                </a>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-6">
+            <h3 class="page-header">
+                Tâches à traiter
+                <form id="index-task-role" class="form-inline">
+                    <div class="form-group">
+                        <select class="form-control">
+                            <option value="ROLE_PRESIDENT">Président</option>
+                            <option value="ROLE_SECRETAIRE">Secrétaire</option>
+                            <option value="ROLE_TRESORIER">Trésorier</option>
+                        </select>
                     </div>
-                </td>
-            </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+                </form>
+            </h3>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Date limite</th>
+                        <th scope="col">Manifestation</th>
+                        <th scope="col">Tâche</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td colspan="3">A venir...</td>
+                    </tr>
+                    {% for tache in taches %}
+                        <tr>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-    <div class="btn-toolbar text-center">
-        <a type="button" class="btn btn-default btn-sm" aria-label="Ajouter" href="{{ path('strollad_prestages_prestation_add') }}">
-            <span class="silk-icon-page-add" aria-hidden="true"></span> Ajouter
-        </a>
-    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $("#toggle-task-state").bootstrapSwitch({
+            onText: 'En cours',
+            offText: 'Archivées',
+            onColor: 'info',
+            offColor: 'warning'
+        });
+    </script>
 {% endblock %}

@@ -15,7 +15,8 @@ class DefaultController extends Controller
         $prestations = $this->getDoctrine()
             ->getRepository('StrolladPrestagesBundle:Prestation')
             ->findAll();
-        return $this->render('StrolladPrestagesBundle:Default:index.html.twig', array('prestations' => $prestations));
+        $taches      = array();
+        return $this->render('StrolladPrestagesBundle:Default:index.html.twig', array('prestations' => $prestations, 'taches' => $taches));
     }
 
     /**
