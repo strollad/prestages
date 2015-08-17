@@ -11,8 +11,11 @@ class PrestationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text', array('label' => 'Nom de la prestation'))
-            ->add('priceKendalch', 'text', array('label' => 'Prix Kendal\'ch'))
+            ->add('name', 'text', array('label' => 'Nom de la manifestation'))
+            ->add('datePrestation', 'date', array('label'  => 'Date de la prestation',
+                                                  'format'  => 'dd/MM/yyyy',
+                                                  'widget' => 'single_text'))
+            ->add('place', 'text', array('label' => 'Commune'))
             ->add('save', 'submit', array('label' => 'Valider'));
     }
 

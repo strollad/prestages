@@ -31,9 +31,9 @@ class Prestation
     private $name;
 
     /**
-     * @var date
+     * @var \DateTime
      * @Assert\NotBlank()
-     * @Assert\Type("date")
+     * @Assert\Date()
      *
      * @ORM\Column(name="date_prestation", type="date", nullable=false)
      */
@@ -58,7 +58,7 @@ class Prestation
      *
      * @ORM\Column(name="priceKendalch", type="float", nullable=false)
      */
-    private $priceKendalch = '0';
+    private $priceKendalch = 0.0;
 
     /**
      * @var float
@@ -67,7 +67,7 @@ class Prestation
      *
      * @ORM\Column(name="priceTransport", type="float", nullable=false)
      */
-    private $priceTransport = '0';
+    private $priceTransport = 0.0;
 
     /**
      * @var float
@@ -76,7 +76,7 @@ class Prestation
      *
      * @ORM\Column(name="priceAnimation", type="float", nullable=false)
      */
-    private $priceAnimation = '0';
+    private $priceAnimation = 0.0;
 
     /**
      * @var float
@@ -85,7 +85,7 @@ class Prestation
      *
      * @ORM\Column(name="priceDivers", type="float", nullable=false)
      */
-    private $priceDivers = '0';
+    private $priceDivers = 0.0;
 
     /**
      * @ORM\OneToOne(targetEntity="Client")
@@ -98,6 +98,14 @@ class Prestation
 
     //private $archive;
     //private
+
+    /**
+     * Construct
+     */
+    public function __construct()
+    {
+        $this->datePrestation  = new \DateTime();
+    }
 
     /**
      * Get id

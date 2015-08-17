@@ -29,9 +29,9 @@
                     <tbody>
                     {% for prestation in prestations %}
                         <tr>
-                            <th scope="row">{{ prestation.id }}</th>
+                            <th scope="row">{{ prestation.datePrestation|date("d/m/Y") }}</th>
                             <td>{{ prestation.name }}</td>
-                            <td>{{ prestation.price }}</td>
+                            <td>{{ prestation.place }}</td>
                             <td>
                                 <div class="btn-toolbar text-center">
                                     <a type="button" class="btn btn-default btn-xs" aria-label="Modifier"
