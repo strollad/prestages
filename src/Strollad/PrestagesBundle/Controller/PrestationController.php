@@ -68,4 +68,19 @@ class PrestationController extends Controller
 
         return $this->redirectToRoute('strollad_prestages_homepage');
     }
+
+    /**
+     * @Route("/presta/{id}/show", name="strollad_prestages_prestation_show", requirements = { "id" = "\d+" }, options={"expose"=true})
+     */
+    public function showAction($id, Request $request)
+    {
+        $em         = $this->getDoctrine()->getManager();
+        $prestation = $em->getRepository('StrolladPrestagesBundle:Prestation')->find($id);
+        if (!$prestation) {
+            throw $this->createNotFoundException(
+                'Pas de prestation avec cet id ' . $id
+            );
+        }
+        return $this->render('StrolladPrestagesBundle:Prestation:show.html.twig', array('prestation' => $prestation));
+    }
 }

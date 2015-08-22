@@ -18,7 +18,8 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle(),
             new Strollad\PrestagesBundle\StrolladPrestagesBundle(),
-            new Ornicar\GravatarBundle\OrnicarGravatarBundle()
+            new Ornicar\GravatarBundle\OrnicarGravatarBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

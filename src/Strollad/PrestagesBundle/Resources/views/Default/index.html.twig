@@ -28,7 +28,7 @@
                     </thead>
                     <tbody>
                     {% for prestation in prestations %}
-                        <tr>
+                        <tr class="show-prestation" data-prestation="{{ prestation.id }}">
                             <th scope="row">{{ prestation.datePrestation|date("d/m/Y") }}</th>
                             <td>{{ prestation.name }}</td>
                             <td>{{ prestation.place }}</td>
@@ -94,12 +94,17 @@
 {% endblock %}
 
 {% block javascripts %}
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
     <script type="text/javascript">
         $("#toggle-task-state").bootstrapSwitch({
             onText: 'En cours',
             offText: 'Archivées',
             onColor: 'info',
             offColor: 'warning'
+        });
+        $(".show-prestation").on('dblclick', function() {
+            window.location = Routing.generate('strollad_prestages_prestation_show', {'id': $(this).attr('data-prestation')});
         });
     </script>
 {% endblock %}
