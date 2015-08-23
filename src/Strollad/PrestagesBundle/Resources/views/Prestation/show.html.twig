@@ -221,7 +221,18 @@
             <div class="row">
                 <div class="col-xs-12 col-md-12">
                     <h4>Editions</h4>
-
+                    <div class="text-center">
+                        <div class="btn-group">
+                            <a type="button" class="btn btn-default" aria-label="Modifier"
+                               href="{{ path('strollad_prestages_prestation_edit', {'id': prestation.id}) }}">
+                                <span class="silk-icon-page-edit" aria-hidden="true"></span> Modifier
+                            </a>
+                            <a type="button" class="btn btn-default" aria-label="Supprimer"
+                               href="{{ path('strollad_prestages_prestation_delete', {'id': prestation.id}) }}">
+                                <span class="silk-icon-page-delete" aria-hidden="true"></span> Supprimer
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
