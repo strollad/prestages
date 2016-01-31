@@ -1,10 +1,11 @@
 <?php
 
-namespace Strollad\PrestagesBundle\Form\Type;
+namespace Strollad\PrestagesBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class PrestationType extends AbstractType
 {
@@ -16,6 +17,9 @@ class PrestationType extends AbstractType
                                                   'format'  => 'dd/MM/yyyy',
                                                   'widget' => 'single_text'))
             ->add('place', 'text', array('label' => 'Commune'))
+            ->add('client', EntityType::class, array(
+                'class' => 'Strollad\PrestagesBundle\Entity\Client',
+                'choice_label' => 'organisation'))
             ->add('save', 'submit', array('label' => 'Valider'));
     }
 

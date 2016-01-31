@@ -3,7 +3,7 @@
 namespace Strollad\PrestagesBundle\Controller;
 
 use Strollad\PrestagesBundle\Entity\Prestation;
-use Strollad\PrestagesBundle\Form\Type\PrestationType;
+use Strollad\PrestagesBundle\Form\PrestationType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -44,7 +44,7 @@ class PrestationController extends Controller
         $form->handleRequest($request);
         if ($form->isValid()) {
             $em->flush();
-            return $this->redirectToRoute('strollad_prestages_homepage');
+            return $this->redirectToRoute('strollad_prestages_prestation_show', array('id' => $id));
         }
         return $this->render('StrolladPrestagesBundle:Prestation:form.html.twig', array('title' => 'Modifier la prestation', 'form' => $form->createView()));
     }

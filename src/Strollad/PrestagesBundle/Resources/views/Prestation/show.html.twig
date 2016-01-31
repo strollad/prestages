@@ -12,9 +12,9 @@
                         <dt>Référence</dt>
                         <dd>{{ prestation.id }}</dd>
                         <dt>Organisateur</dt>
-                        <dd>...</dd>
+                        <dd>{{ prestation.client.organisation }}</dd>
                         <dt>Interlocuteur</dt>
-                        <dd>...</dd>
+                        <dd>{{ prestation.client.nom }} {{ prestation.client.prenom }}</dd>
                     </dl>
                 </div>
                 <div class="col-xs-12 col-md-4">
@@ -22,9 +22,9 @@
                         <dt>Date</dt>
                         <dd>{{ prestation.datePrestation|date("d/m/Y") }}</dd>
                         <dt>Adresse</dt>
-                        <dd>...</dd>
+                        <dd>{{ prestation.client.adresse1 }}<br />{{ prestation.client.adresse2 }}</dd>
                         <dt>Téléphone</dt>
-                        <dd>...</dd>
+                        <dd>{{ prestation.client.telFixe }}<br />{{ prestation.client.telPortable }}</dd>
                     </dl>
                 </div>
                 <div class="col-xs-12 col-md-4">
@@ -32,7 +32,7 @@
                         <dt>Manifestation</dt>
                         <dd>{{ prestation.name }}</dd>
                         <dt>Commune</dt>
-                        <dd>...</dd>
+                        <dd>{{ prestation.client.codePostal }}</dd>
                         <dt>Email</dt>
                         <dd>...</dd>
                     </dl>
