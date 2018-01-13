@@ -1,0 +1,35 @@
+security:
+    role_hierarchy:
+        ROLE_MEMBER: ROLE_USER
+        ROLE_BUREAU: ROLE_MEMBER
+        ROLE_SECRETAIRE: ROLE_BUREAU
+        ROLE_TRESORIER: ROLE_BUREAU
+        ROLE_PRESIDENT: ROLE_BUREAU
+        ROLE_ADMIN: [ROLE_SECRETAIRE, ROLE_TRESORIER, ROLE_PRESIDENT]
+    providers:
+        lapinou:
+            entity:
+                class: App\Entity\Utilisateur
+                property: username
+    encoders:
+        App\Entity\Utilisateur:
+            algorithm: bcrypt
+            cost: 12
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            anonymous: ~
+            form_login:
+                login_path: login
+                check_path: login
+            logout:
+                path: logout
+                target: homepage
+
+    access_control:
+      - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+      - { path: ^/logout, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+      - { path: ^/, roles: ROLE_BUREAU }
+

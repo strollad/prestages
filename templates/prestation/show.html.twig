@@ -1,0 +1,241 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h3 class="page-header">D&eacutetails de la prestation '{{  prestation.name }}' <small>{{ prestation.datePrestation|date("d/m/Y") }}</small></h3>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Généralités - Client</div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-12 col-md-4">
+                    <dl class="dl-horizontal">
+                        <dt>Référence</dt>
+                        <dd>{{ prestation.id }}</dd>
+                        <dt>Organisateur</dt>
+                        <dd>{{ prestation.client.organisation }}</dd>
+                        <dt>Interlocuteur</dt>
+                        <dd>{{ prestation.client.nom }} {{ prestation.client.prenom }}</dd>
+                    </dl>
+                </div>
+                <div class="col-xs-12 col-md-4">
+                    <dl class="dl-horizontal">
+                        <dt>Date</dt>
+                        <dd>{{ prestation.datePrestation|date("d/m/Y") }}</dd>
+                        <dt>Adresse</dt>
+                        <dd>{{ prestation.client.adresse1 }}<br />{{ prestation.client.adresse2 }}</dd>
+                        <dt>Téléphone</dt>
+                        <dd>{{ prestation.client.telFixe }}<br />{{ prestation.client.telPortable }}</dd>
+                    </dl>
+                </div>
+                <div class="col-xs-12 col-md-4">
+                    <dl class="dl-horizontal">
+                        <dt>Manifestation</dt>
+                        <dd>{{ prestation.name }}</dd>
+                        <dt>Commune</dt>
+                        <dd>{{ prestation.client.codePostal }}</dd>
+                        <dt>Email</dt>
+                        <dd>...</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Détails</div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-12 col-md-5">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Nb passages</th>
+                                <th>Heure</th>
+                                <th>Durée passage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>...</td>
+                                <td>...</td>
+                                <td>...</td>
+                                <td>...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-xs-12 col-md-7">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <dl class="dl-horizontal" style="margin-bottom: 0">
+                                <dt>Nb danseurs</dt>
+                                <dd>...</dd>
+                                <dt>Nb musiciens</dt>
+                                <dd>...</dd>
+                            </dl>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <dl class="dl-horizontal" style="margin-bottom: 0">
+                                <dt>En costume</dt>
+                                <dd>...</dd>
+                                <dt>Autre formation</dt>
+                                <dd>...</dd>
+                            </dl>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <dl class="dl-horizontal" style="margin-bottom: 0">
+                                <dt>Lieux exact</dt>
+                                <dd>...</dd>
+                                <dt>Repas fourni</dt>
+                                <dd>...</dd>
+                                <dt>RDV longère</dt>
+                                <dd>...</dd>
+                            </dl>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-xs-12 col-md-6">
+                            <dl class="dl-horizontal" style="margin-bottom: 0">
+                                <dt>Départ du car</dt>
+                                <dd>...</dd>
+                                <dt>Horaire RDV sur place</dt>
+                                <dd>...</dd>
+                                <dt>Horaires balances</dt>
+                                <dd>...</dd>
+                                <dt>Groupe libéré à</dt>
+                                <dd>...</dd>
+                                <dt>Heure de retour du car</dt>
+                                <dd>...</dd>
+                            </dl>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <dl class="dl-horizontal" style="margin-bottom: 0">
+                                <dt>Déplacement car en journée</dt>
+                                <dd>...</dd>
+                                <dt>Lieu de RDV</dt>
+                                <dd>...</dd>
+                            </dl>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-xs-12 col-md-6">
+                            <dl class="dl-horizontal" style="margin-bottom: 0">
+                                <dt>Commentaires</dt>
+                                <dd>...</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Participants</div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-12 col-md-5">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>Catégorie</th>
+                            <th>Membre</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>...</td>
+                            <td>...</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Suivi - Pièces jointes - Editions</div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-12 col-md-4">
+                    <dl class="dl-horizontal">
+                        <dt>Modèle de gestion</dt>
+                        <dd>...</dd>
+                    </dl>
+                </div>
+                <div class="col-xs-12 col-md-4">
+                    <dl class="dl-horizontal">
+                        <dt>Archivé</dt>
+                        <dd>...</dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <h4>Client (hors conf.)</h4>
+                    <dl class="dl-horizontal">
+                        <dt>Dernière action</dt>
+                        <dd>...</dd>
+                        <dt>Prochaine étape</dt>
+                        <dd>...</dd>
+                    </dl>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <h4>Membres</h4>
+                    <dl class="dl-horizontal">
+                        <dt>Dernière action</dt>
+                        <dd>...</dd>
+                        <dt>Prochaine étape</dt>
+                        <dd>...</dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <h4>Transporteur</h4>
+                    <dl class="dl-horizontal">
+                        <dt>Dernière action</dt>
+                        <dd>...</dd>
+                        <dt>Prochaine étape</dt>
+                        <dd>...</dd>
+                    </dl>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <h4>GUSO</h4>
+                    <dl class="dl-horizontal">
+                        <dt>Dernière action</dt>
+                        <dd>...</dd>
+                        <dt>Prochaine étape</dt>
+                        <dd>...</dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <h4>Tâches à traiter</h4>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <h4>Pièces jointes</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-12">
+                    <h4>Editions</h4>
+                    <div class="text-center">
+                        <div class="btn-group">
+                            <a type="button" class="btn btn-default" aria-label="Modifier"
+                               href="{{ path('strollad_prestages_prestation_edit', {'id': prestation.id}) }}">
+                                <span class="silk-icon-page-edit" aria-hidden="true"></span> Modifier
+                            </a>
+                            <a type="button" class="btn btn-default" aria-label="Supprimer"
+                               href="{{ path('strollad_prestages_prestation_delete', {'id': prestation.id}) }}">
+                                <span class="silk-icon-page-delete" aria-hidden="true"></span> Supprimer
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

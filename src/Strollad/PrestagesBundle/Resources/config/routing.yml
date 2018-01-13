@@ -1,4 +1,0 @@
-strollad_prestages:
-    resource: "@StrolladPrestagesBundle/Controller/"
-    type:     annotation
-    prefix:   /

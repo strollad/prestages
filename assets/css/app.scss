@@ -1,0 +1,14 @@
+// Modification Bootstrap
+$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
+$font-size-base   : 13px;
+$line-height-base : 1.384615385; // 18/13
+$navbar-height    : 50px;
+
+$table-cell-padding:            5px;
+$table-condensed-cell-padding:  3px;
+
+// Chargement Boostrap
+@import '~bootstrap-sass/assets/stylesheets/bootstrap';
+
+// Chargement Prestages
+@import 'prestages';
