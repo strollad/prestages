@@ -2,34 +2,38 @@
 
 namespace App\Controller;
 
-use Strollad\PrestagesBundle\Entity\Client;
-use Strollad\PrestagesBundle\Form\ClientType;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\Client;
+use App\Form\ClientType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @Route("/client")
+ */
 class ClientController extends Controller
 {
 
     /**
-     * @Route("/client/add", name="strollad_prestages_client_add", options={"expose"=true})
+     * @Route("/ajouter", name="client_ajouter", options={"expose"=true})
      */
-    public function addAction(Request $request)
+    public function ajouter(Request $request, EntityManagerInterface $em): Response
     {
         $client = new Client();
-        $form       = $this->createForm(new ClientType(), $client);
+        $form   = $this->createForm(ClientType::class, $client);
         $form->handleRequest($request);
         $created = false;
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+        if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($client);
             $em->flush();
-            $created = true;
+            $created  = true;
             $template = 'Le nouveau client a été ajouté';
         } else {
-            $template = $this->renderView('client/form.html.twig', array('form' => $form->createView()));
+            $template = $this->renderView('client/form.html.twig', ['form' => $form->createView()]);
         }
-        return new JsonResponse(array('html' => $template, 'created' => $created), 200);
+        return new JsonResponse(['html' => $template, 'created' => $created], 200);
     }
 }

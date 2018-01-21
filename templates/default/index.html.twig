@@ -35,7 +35,7 @@
             </div>
             <div class="btn-toolbar text-center">
                 <a type="button" class="btn btn-default btn-sm" aria-label="Ajouter"
-                   href="{{ path('strollad_prestages_prestation_add') }}">
+                   href="{{ path('prestation_ajouter') }}">
                     <span class="silk-icon-page-add" aria-hidden="true"></span> Ajouter
                 </a>
             </div>
@@ -86,7 +86,7 @@
             offColor: 'warning'
         });
         $(".show-prestation").on('click', function() {
-            window.location = Routing.generate('strollad_prestages_prestation_show', {'id': $(this).attr('data-prestation')});
+            window.location = Routing.generate('prestation_voir', {'id': $(this).attr('data-prestation')});
         });
     </script>
 {% endblock %}

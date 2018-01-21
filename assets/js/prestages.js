@@ -10,7 +10,7 @@ $("#clientAdd").on('click', function() {
     $.ajax({
         type: "GET",
         dataType: 'json',
-        url: Routing.generate('strollad_prestages_client_add'),
+        url: Routing.generate('client_ajouter'),
         async: false
     })
         .done(function(response){
@@ -25,13 +25,12 @@ $("#saveNewClient").on('click', function() {
     $.ajax({
         type: "POST",
         dataType: 'json',
-        url: Routing.generate('strollad_prestages_client_add'),
+        url: Routing.generate('client_ajouter'),
         data: $("form[name=client]").serialize(),
         async: false
     })
         .done(function(response){
-            created = response.created;
-            if (created) {
+            if (response.created) {
                 $("#modalAddClient").modal('hide');
             } else {
                 $("#modalAddClient .modal-body").html(response.html);

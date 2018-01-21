@@ -4,83 +4,62 @@ namespace App\Controller;
 
 use App\Entity\Prestation;
 use App\Form\PrestationType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
+/**
+ * @Route("/prestation")
+ */
 class PrestationController extends Controller
 {
 
     /**
-     * @Route("/presta/add", name="strollad_prestages_prestation_add")
+     * @Route("/ajouter", name="prestation_ajouter")
      */
-    public function addAction(Request $request)
+    public function ajouter(Request $request, EntityManagerInterface $em)
     {
         $prestation = new Prestation();
         $form       = $this->createForm(PrestationType::class, $prestation);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $em->persist($prestation);
             $em->flush();
-            return $this->redirectToRoute('strollad_prestages_homepage');
+            return $this->redirectToRoute('homepage');
         }
-        return $this->render('prestation/form.html.twig', array('title' => 'Ajouter la prestation', 'form' => $form->createView()));
+        return $this->render('prestation/form.html.twig', ['title' => 'Ajouter la prestation', 'form' => $form->createView()]);
     }
 
     /**
-     * @Route("/presta/{id}/edit", name="strollad_prestages_prestation_edit", requirements = { "id" = "\d+" })
+     * @Route("/{id}/modifier", name="prestation_modifier", requirements = { "id" = "\d+" })
      */
-    public function editAction($id, Request $request)
+    public function modifier(Request $request, Prestation $prestation, EntityManagerInterface $em)
     {
-        $em         = $this->getDoctrine()->getManager();
-        $prestation = $em->getRepository('StrolladPrestagesBundle:Prestation')->find($id);
-        if (!$prestation) {
-            throw $this->createNotFoundException(
-                'Pas de prestation avec cet id ' . $id
-            );
-        }
-        $form = $this->createForm(new PrestationType(), $prestation);
+        $form = $this->createForm(PrestationType::class, $prestation);
         $form->handleRequest($request);
         if ($form->isValid()) {
             $em->flush();
-            return $this->redirectToRoute('strollad_prestages_prestation_show', array('id' => $id));
+            return $this->redirectToRoute('prestation_voir', ['id' => $prestation->getId()]);
         }
-        return $this->render('prestation/form.html.twig', array('title' => 'Modifier la prestation', 'form' => $form->createView()));
+        return $this->render('prestation/form.html.twig', ['title' => 'Modifier la prestation', 'form' => $form->createView()]);
     }
 
     /**
-     * @Route("/presta/{id}/delete", name="strollad_prestages_prestation_delete", requirements = { "id" = "\d+" })
+     * @Route("/{id}/supprimer", name="prestation_supprimer", requirements = { "id" = "\d+" })
      */
-    public function deleteAction($id)
+    public function supprimer(Prestation $prestation, EntityManagerInterface $em)
     {
-        $em         = $this->getDoctrine()->getManager();
-        $prestation = $em->getRepository('StrolladPrestagesBundle:Prestation')->find($id);
-
-        if (!$prestation) {
-            throw $this->createNotFoundException(
-                'Pas de prestation avec cet id ' . $id
-            );
-        }
-
         $em->remove($prestation);
         $em->flush();
-
-        return $this->redirectToRoute('strollad_prestages_homepage');
+        return $this->redirectToRoute('homepage');
     }
 
     /**
-     * @Route("/presta/{id}/show", name="strollad_prestages_prestation_show", requirements = { "id" = "\d+" }, options={"expose"=true})
+     * @Route("/{id}", name="prestation_voir", requirements = { "id" = "\d+" }, options={"expose"=true})
      */
-    public function showAction($id, Request $request)
+    public function voir(Prestation $prestation)
     {
-        $em         = $this->getDoctrine()->getManager();
-        $prestation = $em->getRepository('StrolladPrestagesBundle:Prestation')->find($id);
-        if (!$prestation) {
-            throw $this->createNotFoundException(
-                'Pas de prestation avec cet id ' . $id
-            );
-        }
-        return $this->render('prestation/show.html.twig', array('prestation' => $prestation));
+        return $this->render('prestation/show.html.twig', ['prestation' => $prestation]);
     }
 }

@@ -5,6 +5,8 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 
@@ -14,40 +16,34 @@ class SecurityController extends Controller
     /**
      * @Route("/login", name="login")
      */
-    public function loginAction(Request $request, AuthenticationUtils $authUtils)
+    public function login(Request $request, AuthenticationUtils $authUtils)
     {
         // get the login error if there is one
         $error = $authUtils->getLastAuthenticationError();
-
         // last username entered by the user
         $lastUsername = $authUtils->getLastUsername();
-
-        return $this->render('security/login.html.twig', array(
-            'last_username' => $lastUsername,
-            'error'         => $error,
-        ));
+        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
     /**
      * @Route("/logout", name="logout")
      */
-    public function logoutAction()
+    public function logout()
     {
         // this controller will not be executed,
         // as the route is handled by the Security system
     }
 
     /**
-     * @Route("/change-my-password", name="strollad_prestages_change_my_password")
+     * @Route("/changer-mot-passe", name="changer_mot_passe")
      */
-    public function changeMyPasswordAction(Request $request)
+    public function changerMotPasse(Request $request, TokenStorageInterface $token, UserPasswordEncoderInterface $encoder)
     {
         $pass1 = $request->request->get('new-pass-1');
         $pass2 = $request->request->get('new-pass-2');
         if ($pass1 == $pass2) {
             if (strlen($pass1) >= 8) {
-                $me       = $this->get('security.token_storage')->getToken()->getUser();
-                $encoder  = $this->container->get('security.password_encoder');
+                $me       = $token->getToken()->getUser();
                 $password = $encoder->encodePassword($me, $pass1);
                 $me->setPassword($password);
                 $em = $this->getDoctrine()->getManager();
@@ -69,6 +65,6 @@ class SecurityController extends Controller
                 'Les mots de passe fournis ne sont pas identiques'
             );
         }
-        return $this->redirectToRoute('strollad_prestages_myprofil');
+        return $this->redirectToRoute('mon_profil');
     }
 }
