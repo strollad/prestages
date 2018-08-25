@@ -1,24 +1,19 @@
-if ($("#prestation_client").length) {
-    parent = $("#prestation_client").parent();
-    parent.removeClass('col-sm-10');
-    parent.addClass('col-sm-9');
-    grandparent = parent.parent();
-    grandparent.append($("<div></div>").addClass('col-sm-1').html('<button id="clientAdd" type="button" class="btn btn-default btn-xs" aria-label="Ajout client" data-toggle="modal" data-target="#modalAddClient"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>'));
-}
-
-$("#clientAdd").on('click', function() {
-    $.ajax({
-        type: "GET",
-        dataType: 'json',
-        url: Routing.generate('client_ajouter'),
-        async: false
-    })
-        .done(function(response){
-            $("#modalAddClient .modal-body").html(response.html);
+$("#prestation_client").on('click', function(){
+    if ($(this).val() == 'addClient') {
+        $('#modalAddClient').modal('show');
+        $.ajax({
+            type: "GET",
+            dataType: 'json',
+            url: Routing.generate('client_ajouter'),
+            async: false
         })
-        .fail(function(jqXHR, textStatus, errorThrown){
-            alert('Error : ' + errorThrown);
-        });
+            .done(function(response){
+                $("#modalAddClient .modal-body").html(response.html);
+            })
+            .fail(function(jqXHR, textStatus, errorThrown){
+                alert('Error : ' + errorThrown);
+            });
+    }
 });
 
 $("#saveNewClient").on('click', function() {
@@ -32,6 +27,8 @@ $("#saveNewClient").on('click', function() {
         .done(function(response){
             if (response.created) {
                 $("#modalAddClient").modal('hide');
+                $("#prestation_client optgroup[label=Existants]").append($('<option></option>').val(response.id).html(response.organisation));
+                $("#prestation_client").val(response.id);
             } else {
                 $("#modalAddClient .modal-body").html(response.html);
             }
@@ -39,4 +36,14 @@ $("#saveNewClient").on('click', function() {
         .fail(function(jqXHR, textStatus, errorThrown){
             alert('Error : ' + errorThrown);
         });
+});
+
+$(".show-prestation").on('click', function() {
+    window.location = Routing.generate('prestation_voir', {'id': $(this).attr('data-prestation')});
+});
+$(".show-client").on('click', function() {
+    window.location = Routing.generate('client_voir', {'id': $(this).attr('data-client')});
+});
+$(".show-utilisateur").on('click', function() {
+    window.location = Routing.generate('utilisateur_voir', {'id': $(this).attr('data-utilisateur')});
 });

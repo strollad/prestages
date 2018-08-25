@@ -91,11 +91,16 @@ class Client
      */
     private $telPortable;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Prestation", mappedBy="client")
+     */
+    private $prestations;
+
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -118,7 +123,7 @@ class Client
     /**
      * Get isMorale
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getIsMorale()
     {
@@ -141,7 +146,7 @@ class Client
     /**
      * Get organisation
      *
-     * @return string 
+     * @return string
      */
     public function getOrganisation()
     {
@@ -164,7 +169,7 @@ class Client
     /**
      * Get nom
      *
-     * @return string 
+     * @return string
      */
     public function getNom()
     {
@@ -187,7 +192,7 @@ class Client
     /**
      * Get prenom
      *
-     * @return string 
+     * @return string
      */
     public function getPrenom()
     {
@@ -210,7 +215,7 @@ class Client
     /**
      * Get adresse1
      *
-     * @return string 
+     * @return string
      */
     public function getAdresse1()
     {
@@ -233,7 +238,7 @@ class Client
     /**
      * Get adresse2
      *
-     * @return string 
+     * @return string
      */
     public function getAdresse2()
     {
@@ -256,7 +261,7 @@ class Client
     /**
      * Get codePostal
      *
-     * @return integer 
+     * @return integer
      */
     public function getCodePostal()
     {
@@ -279,7 +284,7 @@ class Client
     /**
      * Get ville
      *
-     * @return string 
+     * @return string
      */
     public function getVille()
     {
@@ -302,7 +307,7 @@ class Client
     /**
      * Get telFixe
      *
-     * @return string 
+     * @return string
      */
     public function getTelFixe()
     {
@@ -325,10 +330,15 @@ class Client
     /**
      * Get telPortable
      *
-     * @return string 
+     * @return string
      */
     public function getTelPortable()
     {
         return $this->telPortable;
+    }
+
+    public function getPrestations()
+    {
+        return $this->prestations;
     }
 }

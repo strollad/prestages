@@ -38,9 +38,15 @@
                 <img alt="Strollad" src="/images/logo2013bandeau.png">
             </a>
         </div>
+        {% set route = app.request.get('_route') %}
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="{{ path('homepage') }}">Accueil</a></li>
+                <li class="{{ 'homepage' in route ? 'active' }}"><a href="{{ path('homepage') }}">Accueil</a></li>
+                <!--li class="{{ 'prestations_prestation' in route ? 'active' }}"><a href="{{ path('homepage') }}">Prestations</a></li-->
+                <li class="{{ 'client_liste' in route ? 'active' }}"><a href="{{ path('client_liste') }}">Clients</a></li>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li class="{{ 'utilisateur_liste' in route ? 'active' }}"><a href="{{ path('utilisateur_liste') }}">Utilisateurs</a></li>
+                {% endif %}
             </ul>
             <img src="{{ gravatar(app.user.email) }}" class="pull-right"/>
             <ul class="nav navbar-nav pull-right">

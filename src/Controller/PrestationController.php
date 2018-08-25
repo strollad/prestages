@@ -38,7 +38,7 @@ class PrestationController extends Controller
     {
         $form = $this->createForm(PrestationType::class, $prestation);
         $form->handleRequest($request);
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
             return $this->redirectToRoute('prestation_voir', ['id' => $prestation->getId()]);
         }

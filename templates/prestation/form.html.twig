@@ -27,3 +27,9 @@
         </div>
     </div>
 {% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+         $("#prestation_client").append($("<optgroup></optgroup>").attr('label', 'Nouveau').html('<option value="addClient">Nouveau</option>'));
+    </script>
+{% endblock %}

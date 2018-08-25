@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,7 +16,7 @@ class ClientType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('isMorale', 'checkbox', array('label' => 'Personne morale'))
+            ->add('isMorale', CheckboxType::class, array('label' => 'Personne morale'))
             ->add('organisation')
             ->add('nom')
             ->add('prenom')
@@ -27,14 +28,14 @@ class ClientType extends AbstractType
             ->add('telPortable')
         ;
     }
-    
+
     /**
      * @param OptionsResolver $resolver
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Strollad\PrestagesBundle\Entity\Client'
+            'data_class' => 'App\Entity\Client'
         ));
     }
 }

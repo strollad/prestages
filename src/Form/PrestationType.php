@@ -2,6 +2,8 @@
 
 namespace App\Form;
 
+use App\Entity\Client;
+use App\Repository\ClientRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -21,8 +23,14 @@ class PrestationType extends AbstractType
                                                   'widget' => 'single_text'))
             ->add('place', TextType::class, array('label' => 'Commune'))
             ->add('client', EntityType::class, array(
-                'class' => 'App\Entity\Client',
-                'choice_label' => 'organisation'))
+                'class' => Client::class,
+                'query_builder' => function (ClientRepository $er) {
+                    return $er->createQueryBuilder('c')
+                        ->orderBy('c.organisation', 'ASC');
+                },
+                'choice_label' => 'organisation',
+                'group_by' => function($choiceValue, $key, $value) {return 'Existants';},
+            ))
             ->add('save', SubmitType::class, array('label' => 'Valider'));
     }
 

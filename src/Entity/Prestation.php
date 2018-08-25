@@ -88,7 +88,7 @@ class Prestation
     private $priceDivers = 0.0;
 
     /**
-     * @ORM\OneToOne(targetEntity="Client")
+     * @ORM\ManyToOne(targetEntity="Client", inversedBy="prestations")
      * @ORM\JoinColumn(name="client_id", referencedColumnName="id")
      **/
     private $client;
@@ -179,7 +179,7 @@ class Prestation
     /**
      * Get priceTransport
      *
-     * @return float 
+     * @return float
      */
     public function getPriceTransport()
     {
@@ -202,7 +202,7 @@ class Prestation
     /**
      * Get priceAnimation
      *
-     * @return float 
+     * @return float
      */
     public function getPriceAnimation()
     {
@@ -225,7 +225,7 @@ class Prestation
     /**
      * Get priceDivers
      *
-     * @return float 
+     * @return float
      */
     public function getPriceDivers()
     {
@@ -248,7 +248,7 @@ class Prestation
     /**
      * Get datePrestation
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDatePrestation()
     {
@@ -271,7 +271,7 @@ class Prestation
     /**
      * Get place
      *
-     * @return string 
+     * @return string
      */
     public function getPlace()
     {

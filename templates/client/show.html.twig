@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h3 class="page-header">D&eacutetails du client '{{  client.organisation ?: '---' }}'</h3>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">Généralités - Utilisateur</div>
+                <div class="panel-body">
+                    <dl class="dl-horizontal">
+                        <dt>Référence</dt>
+                        <dd>{{ client.id }}</dd>
+                        <dt>Organisation</dt>
+                        <dd>{{ client.organisation ?: '---' }}</dd>
+                        <dt>Nom</dt>
+                        <dd>{{ client.nom }}</dd>
+                        <dt>Prénom</dt>
+                        <dd>{{ client.prenom }}</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">Coordonnées</div>
+                <div class="panel-body">
+                    <dl class="dl-horizontal">
+                        <dt>Adress</dt>
+                        <dd>
+                            {{ client.adresse1 }}<br/>{{ client.adresse1 }}<br/>
+                            {{ client.codePostal }} {{ client.ville }}
+                        </dd>
+                        <dt>Téléphone</dt>
+                        <dd>{{ client.telFixe }}<br/>{{ client.telPortable }}</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+            <div class="text-center">
+                <div class="btn-group">
+                    <a type="button" class="btn btn-default" aria-label="Modifier"
+                       href="{{ path('utilisateur_modifier', {'id': client.id}) }}">
+                        <span class="silk-icon-user-edit" aria-hidden="true"></span> Modifer
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

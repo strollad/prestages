@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\ClientRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Client;
 use App\Form\ClientType;
@@ -16,6 +17,14 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class ClientController extends Controller
 {
+    /**
+     * @Route("/", name="client_liste")
+     */
+    public function liste(ClientRepository $clients): Response
+    {
+        return $this->render('client/index.html.twig',
+            ['clients' => $clients->findAll()]);
+    }
 
     /**
      * @Route("/ajouter", name="client_ajouter", options={"expose"=true})
@@ -34,6 +43,16 @@ class ClientController extends Controller
         } else {
             $template = $this->renderView('client/form.html.twig', ['form' => $form->createView()]);
         }
-        return new JsonResponse(['html' => $template, 'created' => $created], 200);
+        return new JsonResponse(['html' => $template, 'created' => $created, 'organisation' => $client->getOrganisation(), 'id' => $client->getId()], 200);
     }
+
+
+    /**
+     * @Route("/{id}", name="client_voir", requirements = { "id" = "\d+" }, options={"expose"=true})
+     */
+    public function voir(Client $client)
+    {
+        return $this->render('client/show.html.twig', ['client' => $client]);
+    }
+
 }

@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h3 class="page-header">Utilisateurs</h3>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Réf°</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Prénom</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Login</th>
+                        <th scope="col">Password</th>
+                        <th scope="col">Rôle</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for utilisateur in utilisateurs %}
+                        <tr class="show-utilisateur" data-utilisateur="{{ utilisateur.id }}">
+                            <th scope="row">{{ utilisateur.id }}</th>
+                            <td>{{ utilisateur.nom }}</td>
+                            <td>{{ utilisateur.prenom }}</td>
+                            <td>{{ utilisateur.email }}</td>
+                            <td>{{ utilisateur.username }}</td>
+                            <td>{{ utilisateur.password != '' ? '***' : '' }}</td>
+                            <td>{{ utilisateur.role }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="btn-toolbar text-center">
+                <a type="button" class="btn btn-default btn-sm" aria-label="Ajouter"
+                   href="{{ path('utilisateur_ajouter') }}">
+                    <span class="silk-icon-page-add" aria-hidden="true"></span> Ajouter
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

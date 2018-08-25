@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h3 class="page-header">D&eacutetails de l'utilisateur '{{  utilisateur.nom }} {{ utilisateur.prenom }}'</h3>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Généralités - Utilisateur</div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-12 col-md-12">
+                    <dl class="dl-horizontal">
+                        <dt>Référence</dt>
+                        <dd>{{ utilisateur.id }}</dd>
+                        <dt>Nom</dt>
+                        <dd>{{ utilisateur.nom }}</dd>
+                        <dt>Prénom</dt>
+                        <dd>{{ utilisateur.prenom }}</dd>
+                        <dt>Email</dt>
+                        <dd>{{ utilisateur.email }}</dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-12">
+                    <div class="text-center">
+                        <div class="btn-group">
+                            <a type="button" class="btn btn-default" aria-label="Modifier"
+                               href="{{ path('utilisateur_modifier', {'id': utilisateur.id}) }}">
+                                <span class="silk-icon-user-edit" aria-hidden="true"></span> Modifer
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Connexion</div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-12 col-md-12">
+                    <dl class="dl-horizontal">
+                        <dt>Login</dt>
+                        <dd>{{ utilisateur.username }}</dd>
+                        <dt>Mot de passe</dt>
+                        <dd>{{ utilisateur.password != '' ? '***' : '' }}</dd>
+                        <dt>Rôle</dt>
+                        <dd>{{ utilisateur.role }}</dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-12">
+                    <div class="text-center">
+                        <div class="btn-group">
+                            <a type="button" class="btn btn-default" aria-label="Modifier"
+                               href="{{ path('utilisateur_generer_password', {'id': utilisateur.id}) }}">
+                                <span class="silk-icon-user-go" aria-hidden="true"></span> Générer mot de passe et envoyer via email
+                            </a>
+                            <a type="button" class="btn btn-default" aria-label="Modifier"
+                               href="{{ path('utilisateur_desactiver', {'id': utilisateur.id}) }}">
+                                <span class="silk-icon-user-delete" aria-hidden="true"></span> Retirer les droits
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
