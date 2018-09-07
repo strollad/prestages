@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -24,9 +26,9 @@ class Client
     /**
      * @var boolean
      *
-     * @ORM\Column(name="is_morale", type="boolean")
+     * @ORM\Column(name="morale", type="boolean")
      */
-    private $isMorale;
+    private $morale;
 
     /**
      * @var string
@@ -66,7 +68,7 @@ class Client
     /**
      * @var integer
      *
-     * @ORM\Column(name="code_postal", type="integer")
+     * @ORM\Column(name="codePostal", type="integer")
      */
     private $codePostal;
 
@@ -80,14 +82,14 @@ class Client
     /**
      * @var string
      *
-     * @ORM\Column(name="tel_fixe", type="string", length=14)
+     * @ORM\Column(name="telFixe", type="string", length=14)
      */
     private $telFixe;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="tel_portable", type="string", length=14)
+     * @ORM\Column(name="telPortable", type="string", length=14)
      */
     private $telPortable;
 
@@ -96,231 +98,130 @@ class Client
      */
     private $prestations;
 
+    public function __construct()
+    {
+        $this->prestations = new ArrayCollection();
+    }
 
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * Set isMorale
-     *
-     * @param boolean $isMorale
-     * @return Client
-     */
-    public function setIsMorale($isMorale)
+    public function isMorale(): ?bool
     {
-        $this->isMorale = $isMorale;
+        return $this->morale;
+    }
+
+    public function setMorale(bool $morale): self
+    {
+        $this->morale = $morale;
 
         return $this;
     }
 
-    /**
-     * Get isMorale
-     *
-     * @return boolean
-     */
-    public function getIsMorale()
+    public function getOrganisation(): ?string
     {
-        return $this->isMorale;
+        return $this->organisation;
     }
 
-    /**
-     * Set organisation
-     *
-     * @param string $organisation
-     * @return Client
-     */
-    public function setOrganisation($organisation)
+    public function setOrganisation(string $organisation): self
     {
         $this->organisation = $organisation;
 
         return $this;
     }
 
-    /**
-     * Get organisation
-     *
-     * @return string
-     */
-    public function getOrganisation()
+    public function getNom(): ?string
     {
-        return $this->organisation;
+        return $this->nom;
     }
 
-    /**
-     * Set nom
-     *
-     * @param string $nom
-     * @return Client
-     */
-    public function setNom($nom)
+    public function setNom(string $nom): self
     {
         $this->nom = $nom;
 
         return $this;
     }
 
-    /**
-     * Get nom
-     *
-     * @return string
-     */
-    public function getNom()
+    public function getPrenom(): ?string
     {
-        return $this->nom;
+        return $this->prenom;
     }
 
-    /**
-     * Set prenom
-     *
-     * @param string $prenom
-     * @return Client
-     */
-    public function setPrenom($prenom)
+    public function setPrenom(string $prenom): self
     {
         $this->prenom = $prenom;
 
         return $this;
     }
 
-    /**
-     * Get prenom
-     *
-     * @return string
-     */
-    public function getPrenom()
+    public function getAdresse1(): ?string
     {
-        return $this->prenom;
+        return $this->adresse1;
     }
 
-    /**
-     * Set adresse1
-     *
-     * @param string $adresse1
-     * @return Client
-     */
-    public function setAdresse1($adresse1)
+    public function setAdresse1(string $adresse1): self
     {
         $this->adresse1 = $adresse1;
 
         return $this;
     }
 
-    /**
-     * Get adresse1
-     *
-     * @return string
-     */
-    public function getAdresse1()
+    public function getAdresse2(): ?string
     {
-        return $this->adresse1;
+        return $this->adresse2;
     }
 
-    /**
-     * Set adresse2
-     *
-     * @param string $adresse2
-     * @return Client
-     */
-    public function setAdresse2($adresse2)
+    public function setAdresse2(string $adresse2): self
     {
         $this->adresse2 = $adresse2;
 
         return $this;
     }
 
-    /**
-     * Get adresse2
-     *
-     * @return string
-     */
-    public function getAdresse2()
+    public function getCodePostal(): ?int
     {
-        return $this->adresse2;
+        return $this->codePostal;
     }
 
-    /**
-     * Set codePostal
-     *
-     * @param integer $codePostal
-     * @return Client
-     */
-    public function setCodePostal($codePostal)
+    public function setCodePostal(int $codePostal): self
     {
         $this->codePostal = $codePostal;
 
         return $this;
     }
 
-    /**
-     * Get codePostal
-     *
-     * @return integer
-     */
-    public function getCodePostal()
+    public function getVille(): ?string
     {
-        return $this->codePostal;
+        return $this->ville;
     }
 
-    /**
-     * Set ville
-     *
-     * @param string $ville
-     * @return Client
-     */
-    public function setVille($ville)
+    public function setVille(string $ville): self
     {
         $this->ville = $ville;
 
         return $this;
     }
 
-    /**
-     * Get ville
-     *
-     * @return string
-     */
-    public function getVille()
+    public function getTelFixe(): ?string
     {
-        return $this->ville;
+        return $this->telFixe;
     }
 
-    /**
-     * Set telFixe
-     *
-     * @param string $telFixe
-     * @return Client
-     */
-    public function setTelFixe($telFixe)
+    public function setTelFixe(string $telFixe): self
     {
         $this->telFixe = $telFixe;
 
         return $this;
     }
 
-    /**
-     * Get telFixe
-     *
-     * @return string
-     */
-    public function getTelFixe()
+    public function getTelPortable(): ?string
     {
-        return $this->telFixe;
+        return $this->telPortable;
     }
 
-    /**
-     * Set telPortable
-     *
-     * @param string $telPortable
-     * @return Client
-     */
-    public function setTelPortable($telPortable)
+    public function setTelPortable(string $telPortable): self
     {
         $this->telPortable = $telPortable;
 
@@ -328,17 +229,34 @@ class Client
     }
 
     /**
-     * Get telPortable
-     *
-     * @return string
+     * @return Collection|Prestation[]
      */
-    public function getTelPortable()
-    {
-        return $this->telPortable;
-    }
-
-    public function getPrestations()
+    public function getPrestations(): Collection
     {
         return $this->prestations;
     }
+
+    public function addPrestation(Prestation $prestation): self
+    {
+        if (!$this->prestations->contains($prestation)) {
+            $this->prestations[] = $prestation;
+            $prestation->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removePrestation(Prestation $prestation): self
+    {
+        if ($this->prestations->contains($prestation)) {
+            $this->prestations->removeElement($prestation);
+            // set the owning side to null (unless already changed)
+            if ($prestation->getClient() === $this) {
+                $prestation->setClient(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

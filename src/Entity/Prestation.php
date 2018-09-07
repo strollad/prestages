@@ -35,7 +35,7 @@ class Prestation
      * @Assert\NotBlank()
      * @Assert\Date()
      *
-     * @ORM\Column(name="date_prestation", type="date", nullable=false)
+     * @ORM\Column(name="datePrestation", type="date", nullable=false)
      */
     private $datePrestation;
 
@@ -89,215 +89,125 @@ class Prestation
 
     /**
      * @ORM\ManyToOne(targetEntity="Client", inversedBy="prestations")
-     * @ORM\JoinColumn(name="client_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="client", referencedColumnName="id")
      **/
     private $client;
 
-    //private $repas; // Aucun, Midi, Soir, Midi + Soir
-    // on efface autreformation et on étend Nb musiciens
-
-    //private $archive;
-    //private
-
     /**
-     * Construct
+     * @ORM\Column(name="workflowState", type="json_array", nullable=true)
      */
-    public function __construct()
-    {
-        $this->datePrestation  = new \DateTime();
-    }
+    protected $workflowState;
 
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * Set name
-     *
-     * @param string $name
-     * @return Prestation
-     */
-    public function setName($name)
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
     {
         $this->name = $name;
 
         return $this;
     }
 
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
+    public function getDatePrestation(): ?\DateTimeInterface
     {
-        return $this->name;
+        return $this->datePrestation;
     }
 
-    /**
-     * Set price
-     *
-     * @param float $price
-     * @return Prestation
-     */
-    public function setPriceKendalch($price)
-    {
-        $this->priceKendalch = $price;
-
-        return $this;
-    }
-
-    /**
-     * Get price
-     *
-     * @return float
-     */
-    public function getPriceKendalch()
-    {
-        return $this->priceKendalch;
-    }
-
-    /**
-     * Set priceTransport
-     *
-     * @param float $priceTransport
-     * @return Prestation
-     */
-    public function setPriceTransport($priceTransport)
-    {
-        $this->priceTransport = $priceTransport;
-
-        return $this;
-    }
-
-    /**
-     * Get priceTransport
-     *
-     * @return float
-     */
-    public function getPriceTransport()
-    {
-        return $this->priceTransport;
-    }
-
-    /**
-     * Set priceAnimation
-     *
-     * @param float $priceAnimation
-     * @return Prestation
-     */
-    public function setPriceAnimation($priceAnimation)
-    {
-        $this->priceAnimation = $priceAnimation;
-
-        return $this;
-    }
-
-    /**
-     * Get priceAnimation
-     *
-     * @return float
-     */
-    public function getPriceAnimation()
-    {
-        return $this->priceAnimation;
-    }
-
-    /**
-     * Set priceDivers
-     *
-     * @param float $priceDivers
-     * @return Prestation
-     */
-    public function setPriceDivers($priceDivers)
-    {
-        $this->priceDivers = $priceDivers;
-
-        return $this;
-    }
-
-    /**
-     * Get priceDivers
-     *
-     * @return float
-     */
-    public function getPriceDivers()
-    {
-        return $this->priceDivers;
-    }
-
-    /**
-     * Set datePrestation
-     *
-     * @param \DateTime $datePrestation
-     * @return Prestation
-     */
-    public function setDatePrestation($datePrestation)
+    public function setDatePrestation(\DateTimeInterface $datePrestation): self
     {
         $this->datePrestation = $datePrestation;
 
         return $this;
     }
 
-    /**
-     * Get datePrestation
-     *
-     * @return \DateTime
-     */
-    public function getDatePrestation()
+    public function getPlace(): ?string
     {
-        return $this->datePrestation;
+        return $this->place;
     }
 
-    /**
-     * Set place
-     *
-     * @param string $place
-     * @return Prestation
-     */
-    public function setPlace($place)
+    public function setPlace(string $place): self
     {
         $this->place = $place;
 
         return $this;
     }
 
-    /**
-     * Get place
-     *
-     * @return string
-     */
-    public function getPlace()
+    public function getPriceKendalch(): ?float
     {
-        return $this->place;
+        return $this->priceKendalch;
     }
 
-    /**
-     * Set client
-     *
-     * @param Client $client
-     * @return Prestation
-     */
-    public function setClient(Client $client = null)
+    public function setPriceKendalch(float $priceKendalch): self
     {
-        $this->client = $client;
+        $this->priceKendalch = $priceKendalch;
 
         return $this;
     }
 
-    /**
-     * Get client
-     *
-     * @return Client
-     */
-    public function getClient()
+    public function getPriceTransport(): ?float
+    {
+        return $this->priceTransport;
+    }
+
+    public function setPriceTransport(float $priceTransport): self
+    {
+        $this->priceTransport = $priceTransport;
+
+        return $this;
+    }
+
+    public function getPriceAnimation(): ?float
+    {
+        return $this->priceAnimation;
+    }
+
+    public function setPriceAnimation(float $priceAnimation): self
+    {
+        $this->priceAnimation = $priceAnimation;
+
+        return $this;
+    }
+
+    public function getPriceDivers(): ?float
+    {
+        return $this->priceDivers;
+    }
+
+    public function setPriceDivers(float $priceDivers): self
+    {
+        $this->priceDivers = $priceDivers;
+
+        return $this;
+    }
+
+    public function getWorkflowState()
+    {
+        return $this->workflowState;
+    }
+
+    public function setWorkflowState($workflowState): self
+    {
+        $this->workflowState = $workflowState;
+
+        return $this;
+    }
+
+    public function getClient(): ?Client
     {
         return $this->client;
+    }
+
+    public function setClient(?Client $client): self
+    {
+        $this->client = $client;
+
+        return $this;
     }
 }

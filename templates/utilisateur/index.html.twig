@@ -26,7 +26,7 @@
                             <td>{{ utilisateur.email }}</td>
                             <td>{{ utilisateur.username }}</td>
                             <td>{{ utilisateur.password != '' ? '***' : '' }}</td>
-                            <td>{{ utilisateur.role }}</td>
+                            <td>{{ utilisateur.roles|join }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>
